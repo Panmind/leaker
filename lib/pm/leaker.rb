@@ -59,6 +59,7 @@ module PM
         controller.class_eval do
           before_filter thread_key
           define_method(thread_key) { Thread.current[thread_key] = send(method) }
+          protected thread_key
         end
       end
     end
