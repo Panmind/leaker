@@ -14,7 +14,7 @@ module PM
       #
       # The special <tt>:all</tt> symbol, passed to the <tt>:to</tt>
       # option, will extend the leak method to *all* ActiveRecord::Base
-      # instances. Use with care!
+      # and CouchRest::ExtendedDocument instances. Use with care!
       #
       def leaks(method, options)
         controller = self
@@ -28,9 +28,8 @@ module PM
           raise ArgumentError, 'Leakage: :to => [Model {, Model ... } ] is required'
         end
 
-        models = [ActiveRecord::Base] if models == :all
-        unless models.all? { |model| model <= ActiveRecord::Base }
-          raise ArgumentError, "Leakage: All classes in :to must be ActiveRecords"
+        if models == :all
+          models = [ActiveRecord::Base, CouchRest::ExtendedDocument]
         end
 
         models.reject! do |model|
