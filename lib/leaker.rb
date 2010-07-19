@@ -29,7 +29,8 @@ module Panmind
         end
 
         if models == :all
-          models = [ActiveRecord::Base, CouchRest::ExtendedDocument]
+          models = [ActiveRecord::Base]
+          models.push CouchRest::ExtendedDocument if defined?(CouchRest::ExtendedDocument)
         end
 
         models.reject! do |model|
