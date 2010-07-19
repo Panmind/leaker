@@ -1,16 +1,16 @@
-module PM
+module Panmind
   module Leaker
     module PluginMethods
       # Leaks the given controller +method+ to the model classes array
       # defined in the <tt>:to</tt> option. E.g.:
       #
-      # class PippoController < ApplicationController
-      #   leaks :current_user, :to => [Pippo]
+      # class FooController < ApplicationController
+      #   leaks :current_user, :to => [Bar]
       # end
       #
-      # During the request cycle, an instance of the Pippo model will
-      # have access to the value returned by the :current_user in the
-      # controller.
+      # During the request cycle, an instance of the Bar model will
+      # have access to the value returned by the :current_user method
+      # in the controller.
       #
       # The special <tt>:all</tt> symbol, passed to the <tt>:to</tt>
       # option, will extend the leak method to *all* ActiveRecord::Base
@@ -70,5 +70,3 @@ module PM
     end
   end
 end
-
-ActionController::Base.extend PM::Leaker::PluginMethods
